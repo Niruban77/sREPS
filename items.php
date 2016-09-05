@@ -8,14 +8,67 @@
 
                 <article>
                     <header>
-                        <h1>Add an item</h1>
+                        <h1>Item List</h1>
 						
+						<?php
+						
+						$host = "localhost"; 
+						$user = "root"; // your user name 
+						$pwd = ""; // your password
+						$sql_db = "srepsdb"; // your database 
+						
+						$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+						
+						if (!$conn) 
+						{ 
+							// Displays an error message 
+							echo "<p>Database connection failure</p>"; // not in production script 
+						} 
+						else 
+						{
+							$query = "select * from item";
+							
+							$result = mysqli_query($conn, $query); 
+							
+							if(!$result) 
+							{ 
+								echo "<p>Something is wrong with ", $query, "</p>"; 
+							} 
+							else 
+							{
+								echo "<table id=\"itemlist\" border=\"1\">"; 
+								echo "<tr>"
+									."<th scope=\"col\">ID</th>" 
+									."<th scope=\"col\">Name</th>"
+									."<th scope=\"col\">Category</th>"
+									."<th scope=\"col\">Quantity</th>"
+									."<th scope=\"col\">Price</th>" 
+									."</tr>"; 
+								
+								
+									while ($row = mysqli_fetch_assoc($result))
+									{ 
+										$itemtable = "";
+																									
+										echo "<tr>"; 
+										echo "<td>",$row["item_id"],"</td>"; 
+										echo "<td>",$row["item_name"],"</td>"; 
+										echo "<td>",$row["item_category"],"</td>";
+										echo "<td>",$row["item_quantity"],"</td>";
+										echo "<td>",$row["item_price"],"</td>";
+										echo "</tr>"; 
+									} 
+									
+								echo "</table>"; 	
+							}
+						}
+						?>
 						
                         <div id="contact-form">
-                         <form action="reg-sales.php" method="post">
-
-                            <label>&nbsp; </label> <input type="submit" value="Submit" class="button" />
-                            <input type="reset" value="Cancel" class="button" />
+						<h1>Add an Item</h1>
+                        <form action="reg-sales.php" method="post">
+							<label>&nbsp; </label> <input type="submit" value="Submit" class="button" />
+							<input type="reset" value="Cancel" class="button" />
                         </form></div>
                     </header>
 

@@ -64,14 +64,25 @@
 						}
 						?>
 						
-                        <div id="contact-form">
-						<h1>Add an Item</h1>
-                        <form action="reg-sales.php" method="post">
-							<label>&nbsp; </label> <input type="submit" value="Submit" class="button" />
-							<input type="reset" value="Cancel" class="button" />
-                        </form></div>
+						<div id="contact-form">
+							<h1>Add an Item</h1>
+							<form action="additem.php" method="post">
+								<label>Item Name: <input type="text" name="item_name" size="20"></label>
+								<br>
+								<label>Item Category: <input type="text" name="item_category" size="20"></label>
+								<br>
+								<label>Item Quantity: <input type="text" name="item_quantity" size="20"></label>
+								<br>
+								<label>Item Price: <input type="text" name="item_price" size="20"></label>
+								<br><br>
+								<label>&nbsp; </label> <input type="submit" value="Submit" class="button" />
+								<input type="reset" value="Cancel" class="button" />
+							</form>
+						</div>
+						
+						
                     </header>
-
+					
                 </article>
 
             </div> <!-- #main -->

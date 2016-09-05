@@ -6,18 +6,95 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
 
-                <article>
-                    <header>
-                        <h1>Add a sale</h1>
-                        <div id="contact-form">
-                         <form action="reg-sales.php" method="post">
-
-                            <label>&nbsp; </label> <input type="submit" value="Submit" class="button" />
-                            <input type="reset" value="Cancel" class="button" />
-                        </form></div>
-                    </header>
-
-                </article>
+	<?php
+							
+		$host = "localhost"; 
+		$user = "root"; // your user name 
+		$pwd = ""; // your password
+		$sql_db = "srepsdb"; // your database 
+		
+		$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+		
+		if (!$conn) 
+		{ 
+			// Displays an error message 
+			echo "<p>Database connection failure</p>"; // not in production script 
+		} 
+		else 
+		{
+			$query = "select * from sale";
+			
+			$result = mysqli_query($conn, $query); 
+			
+			if(!$result) 
+			{ 
+				echo "<p>Something is wrong with ", $query, "</p>"; 
+			} 
+			else 
+			{
+				echo "<table id=\"salelist\" border=\"1\">"; 
+				echo "<tr>"
+					."<th scope=\"col\">Sale ID</th>" 
+					."<th scope=\"col\">Staff Email</th>"
+					."<th scope=\"col\">Date</th>"
+					."</tr>"; 
+				
+				
+					while ($row = mysqli_fetch_assoc($result))
+					{ 
+						$itemtable = "";
+																					
+						echo "<tr>"; 
+						echo "<td>",$row["sale_id"],"</td>"; 
+						echo "<td>",$row["user_email"],"</td>"; 
+						echo "<td>",$row["date"],"</td>";
+						echo "</tr>"; 
+					} 
+					
+				echo "</table>"; 	
+			}
+		}
+	?>
+		<div id="contact-form">
+			<h1>Add a Record</h1>
+			<form action="addrecord.php" method="post">
+				<label>
+					<?php
+						$conn2 = @mysqli_connect($host, $user, $pwd, $sql_db);
+						
+						if (!$conn2) 
+						{ 
+							// Displays an error message 
+							echo "<p>Database connection failure</p>"; // not in production script 
+						} 
+						else 
+						{
+							$query2 = "select user_email from users";
+							
+							$result2 = mysqli_query($conn2, $query2);
+							
+							if(!$result2) 
+							{ 
+								echo "<p>Something is wrong with ", $query, "</p>"; 
+							} 
+							else
+							{
+								echo '<select name="user_email">';
+								
+								while ($row2 = mysqli_fetch_assoc($result2))
+								{
+									echo '<option>',$row2["user_email"],'</option>';
+								}
+								
+								echo "</select>";
+							}
+						}
+					?>
+				</label>
+				<label>&nbsp; </label> 
+				<label><input type="submit" value="Submit" class="button" /></label>
+			</form>
+		</div>
 
                <!-- <aside>
                     <h3>You are not logged in</h3>

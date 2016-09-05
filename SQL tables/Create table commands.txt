@@ -19,7 +19,7 @@ primary key (user_email)
 create table sale (
 sale_id int not null auto_increment,
 user_email varchar(20) not null,
-date datetime NOT NULL,
+date date NOT NULL,
 primary key (sale_id),
 Foreign KEY (user_email) references users(user_email)
 );

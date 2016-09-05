@@ -27,7 +27,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql="INSERT INTO users (email, password, name) 
+$sql="INSERT INTO users (user_email, user_password, user_name) 
 VALUES
 ('$_POST[email]','$_POST[password]','$_POST[name]')";
 

@@ -21,7 +21,7 @@ $dbpass = "";
 		$dbconn = new PDO ("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 
 		// SQL looks for a buyer with both entered username and password
-		$sql = "SELECT * FROM `users` WHERE `email` = :email AND `password` = :password";
+		$sql = "SELECT * FROM `users` WHERE `user_email` = :email AND `user_password` = :password";
 		$q = $dbconn->prepare($sql);
 		$q->execute(array(":email"=>$_POST['email'],
 							":password"=>$_POST['password'])

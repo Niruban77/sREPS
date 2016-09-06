@@ -1,79 +1,79 @@
 <?php
 	include 'header.php';
 ?>
-        <div class="main-container">
-            <div class="main wrapper clearfix">
+	<div class="main-container">
+		<div class="main wrapper clearfix">
+			<article>
+				<header>
+					<h1>Login</h1>
+						<p>
+							<?php
+								session_start();
 
-                <article>
-                    <header>
-                        <h1>Login</h1>
-                        <p>
-<?php
-session_start();
+								// connect to Database and check for username and password match
+								$dbhost = "localhost";
+								$dbname = "srepsdb";
+								$dbuser = "root";
+								$dbpass = "";
 
-	// connect to Database and check for username and password match
-$dbhost = "localhost";
-$dbname = "srepsdb";
-$dbuser = "root";
-$dbpass = "";
+								try 
+								{
+									$dbconn = new PDO ("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 
-	try {
-		$dbconn = new PDO ("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
+									// SQL looks for a buyer with both entered username and password
+									$sql = "SELECT * FROM `users` WHERE `user_email` = :email AND `user_password` = :password";
+									$q = $dbconn->prepare($sql);
+									$q->execute(array(":email"=>$_POST['email'], ":password"=>$_POST['password']));
 
-		// SQL looks for a buyer with both entered username and password
-		$sql = "SELECT * FROM `users` WHERE `email` = :email AND `password` = :password";
-		$q = $dbconn->prepare($sql);
-		$q->execute(array(":email"=>$_POST['email'],
-							":password"=>$_POST['password'])
-							);
-
-		$r = $q->fetch();
-
-	}
-	catch(PDOException $e) {
-		echo $e->getMessage();
-	}
+									$r = $q->fetch();
+								}
+								
+								catch(PDOException $e) 
+								{
+									echo $e->getMessage();
+								}
 
 
-	// if result returned only has one set success
-	if(!empty($r)) {
-		echo "<h2 align='center'>Login successful! <br />";
+								// if result returned only has one set success
+								if(!empty($r)) 
+								{
+									echo "<h2 align='center'>Login successful! <br />";
 
-		// admin
-		$_SESSION['email'] = $_POST['email'];
-        if ($_POST['email'] == "admin"){
-            $_SESSION['admin'] = '1';
-        }
-		// Print a nice welcome message
-		echo "Welcome to the system " . $_POST['email'] . "! <br>";
-		echo "Redirecting now.....</h2>";
-		$logged = 1;
-		// redirect to next page
-		header( "refresh:1;url=index.php" );
-	}
-	else {
-		echo "Invalid login <br>";
-		header( "refresh:4;url=index.php" );
-		echo "Redirecting back.....";
-		session_destroy();
-	}
-
-?>
-
-                        </p>
-                    </header>
-
-                </article>
+									// admin
+									$_SESSION['email'] = $_POST['email'];
+									if ($_POST['email'] == "admin")
+									{
+										$_SESSION['admin'] = '1';
+									}
+									
+									// Print a nice welcome message
+									echo "Welcome to the system " . $_POST['email'] . "! <br>";
+									echo "Redirecting now.....</h2>";
+									$logged = 1;
+									
+									// redirect to next page
+									header( "refresh:1;url=index.php" );
+								}
+								else 
+								{
+									echo "Invalid login <br>";
+									header( "refresh:4;url=index.php" );
+									echo "Redirecting back.....";
+									session_destroy();
+								}
+							?>
+						</p>
+				</header>
+			</article>
 
                <!-- <aside>
                     <h3>You are not logged in</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices.</p>
                 </aside>-->
+		</div> <!-- #main -->
+	</div> <!-- #main-container -->
 
-            </div> <!-- #main -->
-        </div> <!-- #main-container -->
-
- <?php
+<?php
 	include 'footer.php';
 ?>
 

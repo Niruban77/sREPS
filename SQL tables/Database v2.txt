@@ -1,0 +1,34 @@
+Database name: srepsdb
+
+create table item (
+item_id int not null auto_increment,
+item_name varchar(20) not null,
+item_category varchar(20) not null,
+item_quantity int not null,
+item_price varchar(40) not null,
+primary key (item_id)
+);
+
+create table users (
+user_email varchar(20) not null,
+user_password varchar(20) not null,
+user_name varchar(20) not null,
+primary key (user_email)
+);
+
+create table sale (
+sale_id int not null auto_increment,
+user_email varchar(20) not null,
+date date NOT NULL,
+primary key (sale_id),
+Foreign KEY (user_email) references users(user_email)
+);
+
+create table transaction (
+sale_id int not null,
+item_id int not null,
+quantity int not null,
+primary key (sale_id, item_id),
+Foreign KEY (sale_id) references sale(sale_id),
+Foreign KEY (item_id) references item(item_id)
+);

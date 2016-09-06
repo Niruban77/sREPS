@@ -70,10 +70,13 @@
 							}
 						}
 					?>
-          <label>Quantity: <input type="text" name="item_quantity" size="1" value="1"></label>
+				
+				<label>Quantity: <input type="text" name="item_quantity" size="1" value="1"></label>
 
 				</label>
+				
 				<label>&nbsp; </label>
+				
 				<label><input type="submit" value="Submit" class="button" /></label>
 			</form>
 		</div>
@@ -122,27 +125,26 @@
     </div>
 
 <?php
-echo "<table id=\"salelist\" border=\"1\">";
-echo "<tr>"
-  ."<th scope=\"col\">Sale ID</th>"
-  ."<th scope=\"col\">Staff Email</th>"
-  ."<th scope=\"col\">Date</th>"
-  ."<th scope=\"col\">Quantity</th>"
-  ."</tr>";
+	echo "<table id=\"salelist\" border=\"1\">";
+	echo "<tr>"
+		  ."<th scope=\"col\">Sale ID</th>"
+		  ."<th scope=\"col\">Staff Email</th>"
+		  ."<th scope=\"col\">Date</th>"
+		  ."<th scope=\"col\">Quantity</th>"
+		  ."</tr>";
+	while ($row = mysqli_fetch_assoc($result))
+	{
+		$itemtable = "";
 
-  while ($row = mysqli_fetch_assoc($result))
-  {
-    $itemtable = "";
+		echo "<tr>";
+		echo "<td>",$row["sale_id"],"</td>";
+		echo "<td>",$row["user_email"],"</td>";
+		echo "<td>",$row["date"],"</td>";
+		echo "<td>",$row["quantity"],"</td>";
+		echo "</tr>";
+	};
 
-    echo "<tr>";
-    echo "<td>",$row["sale_id"],"</td>";
-    echo "<td>",$row["user_email"],"</td>";
-    echo "<td>",$row["date"],"</td>";
-    echo "<td>",$row["quantity"],"</td>";
-    echo "</tr>";
-  };
-
-echo "</table>";
+	echo "</table>";
 ?>
             </div> <!-- #main -->
         </div> <!-- #main-container -->

@@ -130,7 +130,6 @@ echo "<tr>"
   ."<th scope=\"col\">Quantity</th>"
   ."</tr>";
 
-
   while ($row = mysqli_fetch_assoc($result))
   {
     $itemtable = "";
@@ -141,13 +140,13 @@ echo "<tr>"
     echo "<td>",$row["date"],"</td>";
     echo "<td>",$row["quantity"],"</td>";
     echo "</tr>";
-  }
+  };
 
 echo "</table>";
 ?>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
-
+<br><br><br><br><br><br>
 <?php
 	include 'footer.php';
 ?>

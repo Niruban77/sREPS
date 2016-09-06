@@ -18,7 +18,7 @@
 						$sql_db = "srepsdb"; // your database
 
 						$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
-						
+
 						//Displaying Table from Item database
 						if (!$conn)
 						{
@@ -31,7 +31,7 @@
 							$query = "select * from item";
 
 							$result = mysqli_query($conn, $query);
-							
+
 							if(!$result)
 							{
 								//If something is wrong with the connection or query
@@ -67,29 +67,29 @@
 							}
 						}
 					?>
-	
+
 	<!-- ID for CSS -->
 	<div id="contact-form">
 		<h1>Add an Item</h1>
-		
+
 		<!-- Add item form -->
 		<form action="additem.php" method="post">
 			<label>Name: <input type="text" name="item_name" size="20"></label>
-			
+
 			<br>
-			
+
 			<label>Category: <input type="text" name="item_category" size="20"></label>
-			
+
 			<br>
-			
+
 			<label>Quantity: <input type="text" name="item_quantity" size="20"></label>
-			
+
 			<br>
-			
+
 			<label>Price: <input type="text" name="item_price" size="20"></label>
 
 			<br><br>
-	
+
 			<label>&nbsp; </label> <input type="submit" value="Submit" class="button" />
 			<input type="reset" value="Cancel" class="button" />
 		</form>
@@ -98,12 +98,12 @@
 	<!-- ID for CSS -->
 	<div id="contact-form">
 		<h1>Edit an Item</h1>
-		
+
 		<!-- Edit an item form -->
 		<form action="edititem.php" method="post">
 			<label>
 				<?php
-				
+
 					$conn2 = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 					if (!$conn2)
@@ -126,13 +126,13 @@
 					{
 						//Add a drop down list using existing item id from database
 						echo '<select name="item_id">';
-						
+
 						//For every result that can be fetch, a loop add option to the dropdown list for each row fetched.
 						while ($row2 = mysqli_fetch_assoc($result2))
 						{
 							echo '<option>',$row2["item_id"],'</option>';
 						}
-	
+
 						echo "</select>";
 					}
 				}
@@ -144,6 +144,56 @@
 			<input type="reset" value="Cancel" class="button" />
 		</form>
 	</div>
+
+  <!-- ID for CSS -->
+  <div id="contact-form">
+    <h1>Delete an Item</h1>
+
+    <!-- Edit an item form -->
+    <form action="deleteitem.php" method="post">
+      <label>
+        <?php
+
+          $conn2 = @mysqli_connect($host, $user, $pwd, $sql_db);
+
+          if (!$conn2)
+          {
+            // Displays an error message
+            echo "<p>Database connection failure</p>"; // not in production script
+          }
+          else
+          {
+            //query to select item ID from database
+            $query2 = "select item_id from item";
+
+            $result2 = mysqli_query($conn2, $query2);
+
+          if(!$result2)
+          {
+            echo "<p>Something is wrong with ", $query, "</p>";
+          }
+          else
+          {
+            //Add a drop down list using existing item id from database
+            echo '<select name="item_id">';
+
+            //For every result that can be fetch, a loop add option to the dropdown list for each row fetched.
+            while ($row2 = mysqli_fetch_assoc($result2))
+            {
+              echo '<option>',$row2["item_id"],'</option>';
+            }
+
+            echo "</select>";
+          }
+        }
+        ?>
+      </label>
+  <br><br>
+
+      <label>&nbsp; </label> <input type="submit" value="Delete" class="button" />
+      <input type="reset" value="Cancel" class="button" />
+    </form>
+  </div>
 
 	<br><br>
 			</header>

@@ -70,13 +70,13 @@
 							}
 						}
 					?>
-				
+
 				<label>Quantity: <input type="text" name="item_quantity" size="1" value="1"></label>
 
 				</label>
-				
+
 				<label>&nbsp; </label>
-				
+
 				<label><input type="submit" value="Submit" class="button" /></label>
 			</form>
 		</div>

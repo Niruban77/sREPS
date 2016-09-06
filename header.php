@@ -28,10 +28,9 @@
 			<ul>
 				<?php if (!isset($_SESSION['email'])) echo "<li><a href='register.php'>Register</a></li>"; ?>
 				<?php if (!isset($_SESSION['email'])) echo "<li><a href='log.php'>Login</a></li>"; ?>
-				<?php if (isset($_SESSION['email'])) echo "<li><a href='logout.php'>Logout</a></li>"; ?>
 				<?php if (isset($_SESSION['email'])) echo "<li><a href='sales.php'>Sales</a></li>" ?>
 				<?php if (isset($_SESSION['email'])) echo "<li><a href='items.php'>Items</a></li>" ?>
-
+				<?php if (isset($_SESSION['email'])) echo "<li><a href='logout.php'>Logout</a></li>"; ?>
 				<!--<li><a href="#">nav ul li a</a></li>-->
 			</ul>
 		</nav>
